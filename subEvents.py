@@ -108,51 +108,7 @@ with subscriber1, subscriber2, subscriber3:
         
         streaming_pull_future3.cancel()  # Trigger the shutdown.
         streaming_pull_future3.result()
-        
-
-
-
-
-
-        
-subscription_id1 = "book_sub"
-subscription_id2 = "buy_sub"
-subscription_id3 = "search_sub"
-
-subscriber1 = pubsub_v1.SubscriberClient()
-subscriber2 = pubsub_v1.SubscriberClient()
-subscriber3 = pubsub_v1.SubscriberClient()
-
-subscription_path1 = subscriber1.subscription_path(project_id, subscription_id1)
-subscription_path2 = subscriber2.subscription_path(project_id, subscription_id2)
-subscription_path3 = subscriber2.subscription_path(project_id, subscription_id3)
-
-
-streaming_pull_future1 = subscriber1.subscribe(subscription_path1, callback=callback)
-print(f"Listening for messages on {subscription_path1}..\n")
-streaming_pull_future2 = subscriber2.subscribe(subscription_path2, callback=callback)
-print(f"Listening for messages on {subscription_path2}..\n")
-streaming_pull_future3 = subscriber3.subscribe(subscription_path3, callback=callback)
-print(f"Listening for messages on {subscription_path3}..\n")
-
-
-subscriber_shutdown = threading.Event()
-streaming_pull_future1.add_done_callback(lambda result: subscriber_shutdown.set())
-streaming_pull_future2.add_done_callback(lambda result: subscriber_shutdown.set())
-streaming_pull_future3.add_done_callback(lambda result: subscriber_shutdown.set())
-
-
-with subscriber1, subscriber2, subscriber3:
-
-        subscriber_shutdown.wait()
-        streaming_pull_future1.cancel()  # Trigger the shutdown.
-        streaming_pull_future1.result()  # Block until the shutdown is complete.
-    
-        streaming_pull_future2.cancel()  # Trigger the shutdown.
-        streaming_pull_future2.result()  # Block until the shutdown is complete.
-        
-        streaming_pull_future3.cancel()  # Trigger the shutdown.
-        streaming_pull_future3.result()
+       
         
         
         
