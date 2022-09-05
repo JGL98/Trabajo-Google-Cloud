@@ -1,4 +1,4 @@
-# Trabajo de Simulación de publicación e ingesta de datos con Google Cloud. 
+# Trabajo de simulación de publicación e ingesta de datos con Google Cloud. 
 
 
 
